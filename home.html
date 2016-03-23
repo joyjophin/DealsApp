@@ -1,0 +1,78 @@
+<!-- Tabs -->
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class='section'>
+      <ui-state id='activeTab' default='1'></ui-state>
+      <div class="btn-group justified nav-tabs">
+        <a ui-set="{'activeTab': 1}"
+        ui-class="{'active': activeTab == 1}" class="btn btn-default"> All </a>
+        <a ui-set="{'activeTab': 2}"
+        ui-class="{'active': activeTab == 2}" class="btn btn-default"> Popular </a>
+        <a ui-set="{'activeTab': 3}"
+        ui-class="{'active': activeTab == 3}" class="btn btn-default"> Upcoming</a>
+      </div>
+
+      <div ui-if="activeTab == 1">
+          <div class="scrollable-content">
+            <div data-ng-controller="FeedCtrl" data-ng-init="feedUrl='http://www.indiadealsonline.com/rss';loadFeed($event)">
+              <div ng-show="myVar" class="input-prepend" ng-show="feeds.length > 0" ng-show="searchBar">
+                <input class="form-control scrollable-header" type="text" placeholder="Search..." data-ng-model="filterText" />
+              </div>
+              
+              <div class="row-fluid">
+                <ul class="unstyled">
+                  <li ng-repeat="feed in feeds | filter:filterText">
+                    <h5><a href="{{feed.link}}">{{feed.title}}</a>
+                    <!-- <p class="text-left">{{feed.contentSnippet}}</p>                     -->
+                    <small>{{feed.publishedDate}}</small></h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div ui-if="activeTab == 2">
+          <div class="scrollable-content">
+            <div data-ng-controller="FeedCtrl" data-ng-init="feedUrl='http://www.indiadealsonline.com/rss.php';loadFeed($event)">
+              <div ng-show="myVar" class="input-prepend" ng-show="feeds.length > 0" ng-show="searchBar">
+                <input class="form-control scrollable-header" type="text" placeholder="Search..." data-ng-model="filterText" />
+              </div>
+              
+              <div class="row-fluid">
+                <ul class="unstyled">
+                  <li ng-repeat="feed in feeds | filter:filterText">
+                    <h5><a href="{{feed.link}}">{{feed.title}}</a>
+                    <!-- <p class="text-left">{{feed.contentSnippet}}</p>                     -->
+                    <small>{{feed.publishedDate}}</small></h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div ui-if="activeTab == 3">
+          <div class="scrollable-content">
+            <div data-ng-controller="FeedCtrl" data-ng-init="feedUrl='http://www.indiadealsonline.com/rss?status=queued';loadFeed($event)">
+              <div ng-show="myVar" class="input-prepend" ng-show="feeds.length > 0" ng-show="searchBar">
+                <input class="form-control scrollable-header" type="text" placeholder="Search..." data-ng-model="filterText" />
+              </div>
+              
+              <div class="row-fluid">
+                <ul class="unstyled">
+                  <li ng-repeat="feed in feeds | filter:filterText">
+                    <h5><a href="{{feed.link}}">{{feed.title}}</a>
+                    <!-- <p class="text-left">{{feed.contentSnippet}}</p>                     -->
+                    <small>{{feed.publishedDate}}</small></h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
