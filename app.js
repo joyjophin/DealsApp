@@ -4,25 +4,13 @@ google.load("feeds", "1");
 var app = angular.module('DealsApp', [
   'ngRoute',
   'mobile-angular-ui',
-  'mobile-angular-ui.gestures',
   'ngSanitize'
 ])
 
   .config(function($routeProvider) {
-    $routeProvider.when('/',{templateUrl: 'home.html', reloadOnSearch: false});
-    $routeProvider.when('/details',{templateUrl: 'details.html', reloadOnSearch: false});
+    $routeProvider.when('/',{templateUrl: 'home.html'});
+    $routeProvider.when('/details',{templateUrl: 'details.html'});
   })
-
-
-
-  .directive('listDone', function() {
-    return function(scope, element, attrs) {
-      if (scope.$last) { // all are rendered
-        scope.$eval(attrs.listDone);
-      }
-    }
-  })
-
 
   .service('rssFeed', function($q, $rootScope) {
     this.get = function(url) {
@@ -36,29 +24,23 @@ var app = angular.module('DealsApp', [
     }
   })
 
-
   .controller('MainController', function($scope, $location, rssFeed) {
     $scope.feedUrl = 'http://www.indiadealsonline.com/rss';
 
     $scope.loadFeed = function(url) {
       rssFeed.get(url).then(function(result) {
-        //console.log(result);
         if (result.error) {
           alert("ERROR " + result.error.code + ": " + result.error.message + "\nurl: " + url);
         }
         else {
-
           var urlParser = document.createElement('a');
           urlParser.href = result.feed.link;
           result.feed.viewAt = urlParser.hostname;
           $scope.feed_result = result.feed;
           $location.path('/');
-          if ($scope.feed_result.entries == 0) {
-          }
         }
       });
     }
-
 
     $scope.setCurrEntry = function(entry) {
       $scope.currEntry = entry;
