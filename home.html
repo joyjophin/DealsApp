@@ -11,7 +11,7 @@
         <a ui-set="{'activeTab': 3}"
         ui-class="{'active': activeTab == 3}" class="btn btn-default"> Upcoming</a>
       </div>
-      <div ui-if="activeTab == 1">
+      <div ui-if="activeTab == 1" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=published&group=')">
 
           <div class="scrollable-content">
             <div ng-controller="ListCtrl">
@@ -26,7 +26,7 @@
           </div>
 
       </div>
-      <div ui-if="activeTab == 2">
+      <div ui-if="activeTab == 2" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=published&group=')">
 
           <div class="scrollable-content">
             <div ng-controller="ListCtrl">
@@ -41,7 +41,7 @@
           </div>
 
       </div>
-      <div ui-if="activeTab == 3">
+      <div ui-if="activeTab == 3" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=queued&group=')">
 
           <div class="scrollable-content">
             <div ng-controller="ListCtrl">

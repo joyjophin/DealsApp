@@ -25,28 +25,21 @@ var app = angular.module('DealsApp', [
   })
 
   .controller('MainController', function($scope, $location, rssFeed) {
-    $scope.feedUrl = 'http://www.indiadealsonline.com/rss';
-
     $scope.loadFeed = function(url) {
       rssFeed.get(url).then(function(result) {
-        if (result.error) {
-          alert("ERROR " + result.error.code + ": " + result.error.message + "\nurl: " + url);
-        }
-        else {
+
           var urlParser = document.createElement('a');
           urlParser.href = result.feed.link;
           result.feed.viewAt = urlParser.hostname;
           $scope.feed_result = result.feed;
           $location.path('/');
-        }
+
       });
     }
 
     $scope.setCurrEntry = function(entry) {
       $scope.currEntry = entry;
     }
-
-    $scope.loadFeed($scope.feedUrl);
   })
 
   .controller('ListCtrl', function($scope, $location, $timeout) {
