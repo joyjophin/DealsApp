@@ -1,45 +1,13 @@
 <div class="scrollable">  
-  <div class="scrollable-content">
-
-    
-      <div class="container-fluid section">
-        <small>28th Oct 2016</small>
-        <h2>
-            Rs.2500 as Credit on signup at CULTR 
-        </h2>
-        <p align="justify">
-            Get Rs.2500 as Credit on signup at CULTR 
-            Rs.2500 as Credit on signup at CULTR 
-            Rs.2500 as Credit on signup at CULTR 
-            Rs.2500 as Credit on signup at CULTR 
-        </p>
-      </div>
-      <div class="list-group">
-      <div class="list-group-item list-group-item-home">
-        <div>
-            <h3>Comment#1</h3>
-            User Comments Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR 
-        </div>
-      </div>
-      <div class="list-group-item list-group-item-home">
-        <div>
-            <h3>Comment#2</h3>
-            User Comments Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR 
-        </div>
-      </div>
-      <div class="list-group-item list-group-item-home">
-        <div>
-            <h3>Comment#3</h3>
-            User Comments Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR 
-        </div>
-      </div>
-      <div class="list-group-item list-group-item-home">
-        <div>
-            <h3>Comment#4</h3>
-            User Comments Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR Credit on signup at CULTR 
-        </div>
-      </div>
-    </div>
-
+  <div class="scrollable-content"><br>
+  <div style="margin-left:10px;margin-right:10px;"><center>
+  <h3>{{currEntry.title}}</h3></center>
   </div>
+  <div class="well well-small">
+    <p ng-bind-html="currEntry.content"></p>
+
+    <p class="muted">Posted: {{currEntry.publishedDate}} - <a href="{{currEntry.link}}" target="_blank" class="text-info">view at {{feed_result.viewAt}}</a></p>
+  </div>
+
+</div>
 </div>

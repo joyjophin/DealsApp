@@ -1,55 +1,77 @@
+'use strict';
+google.load("feeds", "1");
+
 var app = angular.module('DealsApp', [
   'ngRoute',
   'mobile-angular-ui',
-  'mobile-angular-ui.gestures'
-]);
+  'mobile-angular-ui.gestures',
+  'ngSanitize'
+])
 
-app.config(function($routeProvider) {
-  $routeProvider.when('/',{templateUrl: 'home.html', reloadOnSearch: false});
-  $routeProvider.when('/details',{templateUrl: 'details.html', reloadOnSearch: false});
-});
+  .config(function($routeProvider) {
+    $routeProvider.when('/',{templateUrl: 'home.html', reloadOnSearch: false});
+    $routeProvider.when('/details',{templateUrl: 'details.html', reloadOnSearch: false});
+  })
 
-app.controller('MainController', function($scope){
 
-  // Fake text i used here and there.
-  $scope.lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel explicabo, aliquid eaque soluta nihil eligendi adipisci error, illum corrupti nam fuga omnis quod quaerat mollitia expedita impedit dolores ipsam. Obcaecati.';
 
-  $scope.scrollItems = [
-  {title:'24% off on Fujifilm JX300 Digital Camera'},
-  {title:'50% off on www.thelibrary.in subscriptions'},
-  {title:'1 Year Fortune Subscription for Rs 975'},
-  {title:'Rs.1500 as Credit on signup at CULTR'},
-  {title:'1 Year Fortune Subscription for Rs 9751'},
-  {title:'Rs.2500 as Credit on signup at CULTR'},
-  {title:'14% off on Fujifilm JX300 Digital Camera'},
-  {title:'52% off on www.thelibrary.in subscriptions'},
-  {title:'3 Year Fortune Subscription for Rs 975'},
-  {title:'Get Rs.1500 as Credit on signup at CULTR'},
-  {title:'5 Year Fortune Subscription for Rs 975'},
-  {title:'Get Rs.7500 as Credit on signup at CULTR'},
-  {title:'7 Year Fortune Subscription for Rs 975'}
-  ];
-  
-  $scope.toggle = function() {
-        $scope.myVar = !$scope.myVar;
-        console.log("Togglerd");
-    };
-
-});
-
-app.controller('FeedCtrl', ['$scope','FeedService', function ($scope,Feed) {    
-    $scope.loadFeed=function(e){        
-        Feed.parseFeed($scope.feedUrl).then(function(res){
-            $scope.feeds=res.data.responseData.feed.entries;
-        });
+  .directive('listDone', function() {
+    return function(scope, element, attrs) {
+      if (scope.$last) { // all are rendered
+        scope.$eval(attrs.listDone);
+      }
     }
-}]);
+  })
 
-app.factory('FeedService',['$http',function($http){
-    return {
-        parseFeed : function(url){
-            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+
+  .service('rssFeed', function($q, $rootScope) {
+    this.get = function(url) {
+      var d = $q.defer();
+      var feed = new google.feeds.Feed(url);
+      feed.setNumEntries(10);
+      feed.load(function(result) {
+        $rootScope.$apply(d.resolve(result));
+      });
+      return d.promise;
+    }
+  })
+
+
+  .controller('MainController', function($scope, $location, rssFeed) {
+    $scope.feedUrl = 'http://www.indiadealsonline.com/rss';
+
+    $scope.loadFeed = function(url) {
+      rssFeed.get(url).then(function(result) {
+        //console.log(result);
+        if (result.error) {
+          alert("ERROR " + result.error.code + ": " + result.error.message + "\nurl: " + url);
         }
+        else {
+
+          var urlParser = document.createElement('a');
+          urlParser.href = result.feed.link;
+          result.feed.viewAt = urlParser.hostname;
+          $scope.feed_result = result.feed;
+          $location.path('/');
+          if ($scope.feed_result.entries == 0) {
+          }
+        }
+      });
     }
-}]);
+
+
+    $scope.setCurrEntry = function(entry) {
+      $scope.currEntry = entry;
+    }
+
+    $scope.loadFeed($scope.feedUrl);
+  })
+
+  .controller('ListCtrl', function($scope, $location, $timeout) {
+
+    $scope.viewDetail = function(entry) {
+      $scope.setCurrEntry(entry);
+      $location.path('/details');
+    }
+  })
 
