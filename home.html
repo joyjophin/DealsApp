@@ -1,22 +1,22 @@
 <!-- Tabs -->
 <div class="scrollable">
   <div class="scrollable-content">
-    <div class='section'>
+    <div class='row'>
       <ui-state id='activeTab' default='1'></ui-state>
-      <div class="btn-group justified nav-tabs">
+      <center><div class="col s12" style="padding:5px">
         <a ui-set="{'activeTab': 1}"
         ui-class="{'active': activeTab == 1}" class="btn btn-default"> All </a>
         <a ui-set="{'activeTab': 2}"
         ui-class="{'active': activeTab == 2}" class="btn btn-default"> Popular </a>
         <a ui-set="{'activeTab': 3}"
         ui-class="{'active': activeTab == 3}" class="btn btn-default"> Upcoming</a>
-      </div>
+      </div></center>
       <div ui-if="activeTab == 1" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=published&group=')">
 
-          <div class="scrollable-content">
+          <div class="scrollable-content" style="padding:5px">
             <div ng-controller="ListCtrl">
               <div class="well well-small" ng-repeat="entry in feed_result.entries" ng-cloak>
-                <h4><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></h4>
+                <p class="flow-text"><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></p>
                 <p>
                   Posted: {{entry.publishedDate}} -
                   <span class="label label-info" ng-repeat="category in entry.categories">{{category}}</span>
@@ -31,7 +31,7 @@
           <div class="scrollable-content">
             <div ng-controller="ListCtrl">
               <div class="well well-small" ng-repeat="entry in feed_result.entries" ng-cloak>
-                <h4><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></h4>
+                <p class="flow-text"><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></p>
                 <p>
                   Posted: {{entry.publishedDate}} -
                   <span class="label label-info" ng-repeat="category in entry.categories">{{category}}</span>
@@ -46,7 +46,7 @@
           <div class="scrollable-content">
             <div ng-controller="ListCtrl">
               <div class="well well-small" ng-repeat="entry in feed_result.entries" ng-cloak>
-                <h4><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></h4>
+                <p class="flow-text"><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></p>
                 <p>
                   Posted: {{entry.publishedDate}} -
                   <span class="label label-info" ng-repeat="category in entry.categories">{{category}}</span>
