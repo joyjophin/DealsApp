@@ -4,12 +4,13 @@ google.load("feeds", "1");
 var app = angular.module('DealsApp', [
   'ngRoute',
   'mobile-angular-ui',
+  'mobile-angular-ui.gestures',
   'ngSanitize'
 ])
 
   .config(function($routeProvider) {
-    $routeProvider.when('/',{templateUrl: 'home.html'});
-    $routeProvider.when('/details',{templateUrl: 'details.html'});
+    $routeProvider.when('/',{templateUrl: 'home.html', reloadOnSearch: false});
+    $routeProvider.when('/details',{templateUrl: 'details.html', reloadOnSearch: false});
   })
 
   .service('rssFeed', function($q, $rootScope) {
@@ -25,15 +26,14 @@ var app = angular.module('DealsApp', [
   })
 
   .controller('MainController', function($scope, $location, rssFeed) {
+
     $scope.loadFeed = function(url) {
       rssFeed.get(url).then(function(result) {
-
           var urlParser = document.createElement('a');
           urlParser.href = result.feed.link;
           result.feed.viewAt = urlParser.hostname;
           $scope.feed_result = result.feed;
           $location.path('/');
-
       });
     }
 
