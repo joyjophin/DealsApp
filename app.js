@@ -40,6 +40,28 @@ var app = angular.module('DealsApp', [
     $scope.setCurrEntry = function(entry) {
       $scope.currEntry = entry;
     }
+
+     // 
+  $scope.HamMenu = [
+    { name: 'Home', feedurl: 'http://www.indiadealsonline.com/rss' },
+    { name: 'Computers', feedurl: 'http://www.indiadealsonline.com/rss.php?category=1' },
+    { name: 'Clothing', feedurl: 'http://www.indiadealsonline.com/rss.php?category=2' },
+    { name: 'Electronics and Appliances', feedurl: 'http://www.indiadealsonline.com/rss.php?category=3' },
+    { name: 'Grocery', feedurl: 'http://www.indiadealsonline.com/rss.php?category=4' },
+    { name: 'Health and Beauty', feedurl: 'http://www.indiadealsonline.com/rss.php?category=5' },
+    { name: 'Travel', feedurl: 'http://www.indiadealsonline.com/rss.php?category=6' },
+    { name: 'Books Music and Videos', feedurl: 'http://www.indiadealsonline.com/rss.php?category=7' },
+    { name: 'Books', feedurl: 'http://www.indiadealsonline.com/rss.php?category=8' },
+    { name: 'Music', feedurl: 'http://www.indiadealsonline.com/rss.php?category=9' },
+    { name: 'Videos', feedurl: 'http://www.indiadealsonline.com/rss.php?category=10' },
+    { name: 'Entertainment', feedurl: 'http://www.indiadealsonline.com/rss.php?category=12' },
+    { name: 'Flights', feedurl: 'http://www.indiadealsonline.com/rss.php?category=13' },
+    { name: 'Road Transport', feedurl: 'http://www.indiadealsonline.com/rss.php?category=14' },
+    { name: 'Hotels', feedurl: 'http://www.indiadealsonline.com/rss.php?category=15' },
+    { name: 'Miscellaneous Travel', feedurl: 'http://www.indiadealsonline.com/rss.php?category=16' },
+    { name: 'Everything Else', feedurl: 'http://www.indiadealsonline.com/rss.php?category=11' }
+  ];
+
   })
 
   .controller('ListCtrl', function($scope, $location, $timeout) {
