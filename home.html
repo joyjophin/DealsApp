@@ -28,7 +28,7 @@
       </div>
       <div ui-if="activeTab == 2" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=published&group=')">
 
-          <div class="scrollable-content">
+          <div class="scrollable-content" style="padding:5px">
             <div ng-controller="ListCtrl">
               <div class="well well-small" ng-repeat="entry in feed_result.entries" ng-cloak>
                 <p class="flow-text"><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></p>
@@ -43,7 +43,7 @@
       </div>
       <div ui-if="activeTab == 3" ng-init="loadFeed('http://www.indiadealsonline.com/rss.php?category=&status=queued&group=')">
 
-          <div class="scrollable-content">
+          <div class="scrollable-content" style="padding:5px">
             <div ng-controller="ListCtrl">
               <div class="well well-small" ng-repeat="entry in feed_result.entries" ng-cloak>
                 <p class="flow-text"><a href="" ng-click="viewDetail(entry)">{{entry.title}}</a></p>
